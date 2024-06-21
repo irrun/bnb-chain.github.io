@@ -27,7 +27,7 @@ It is suggested that to split the internal network into two part:
 1. Private network. The private network is isolated from the public
    network. All access to components within this network is strictly
    restricted. The Validator and Payment wallet are expected to be
-   deployed within a private network environment.
+   deployed within a private network environment. 
 
 2. Nat network. The components in this network can communicate with the
    public internet under certain constraints, and the communication
@@ -36,6 +36,8 @@ It is suggested that to split the internal network into two part:
    network environment. It is essential to configure appropriate
    safeguards on the network gateway to prevent DoS attacks and other
    potential threats.
+
+The validator shoule grant its RPC port access only to the mev-sentry. The mev-sentry should open its RPC port to the public and register a domain. The domain should be registered in [bsc-mev-info](https://github.com/bnb-chain/bsc-mev-info) to allow builders access. The recommended specifications for the mev-sentry machine are 2 CPUs and 4 GB of RAM.
 
 ## Preparation
 
@@ -101,6 +103,8 @@ sections in the config.toml. Example:
   BidSimulationLeftOver = 50000000 # 50ms, the time left for bid simulation
   SentryURL = "http://bsc-mev-sentry.io" # it is used for the validator to access the sentry, it should be a private URL or IP:Port.
 
+  # Please find builders in [bsc-mev-info](https://github.com/bnb-chain/bsc-mev-info)
+ 
   [[Eth.Miner.Mev.Builders]]
   Address = "0x45EbEBe8...664D59c12" # builder address which validator is willing to receive bid from
 
